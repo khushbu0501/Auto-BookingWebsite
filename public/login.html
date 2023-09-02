@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>User Login</title>
+    <link rel="stylesheet" href="./styles.css">
+    
+</head>
+<body>
+   
+    <form action="/login" method="post">
+        <h1>User Login</h1>
+        <label for="username">Username:</label>
+        <input type="text" id="username" name="username" required>
+
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password" required>
+
+        <label for="role">Role:</label>
+        <select id="role" name="role">
+            <option value="Student">Student</option>
+            <option value="Provider">Provider</option>
+        </select>
+
+        <input type="submit" value="Login">
+    </form>
+</body>
+<script>
+    document.getElementById('login-form').addEventListener('submit', async function (e) {
+        e.preventDefault();
+
+        const username = document.getElementById('username').value;
+        const password = document.getElementById('password').value;
+        const role = document.getElementById('role').value;
+
+        const response = await fetch('/login', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ username, password, role }),
+        });
+
+        const data = await response.json();
+        if (data.success) {
+            // Redirect to the appropriate dashboard
+            window.location.href = data.role === 'student' ? '/student-dashboard' : '/provider-dashboard';
+        } else {
+            alert('Login failed. Please check your credentials.');
+        }
+    });
+</script>
+</html>
