@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Student Profile</title>
+  <style>
+    h1 {
+      color: black;
+    }
+    h2 {
+
+    }
+    .profile {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+  </style>
+</head>
+<body>
+  <div class="profile">
+    <h1>Welcome, <span id="username"></span></h1>
+    <h2>Let's Book your Auto </h2>
+    <form id="bookingForm">
+      <div style="display: flex; flex-direction: row">
+        <input type="text" placeholder="Starting location" />
+        <input type="text" placeholder="Destination location" />
+      </div>
+
+      <label for="bookingTime">Select Booking Time:</label>
+      <input type="datetime-local" id="bookingTime" name="bookingTime" required>
+      <button type="submit">Book Auto</button>
+
+      <p>Select Booking Preference:</p>
+      <label>
+        <input type="radio" name="bookingPreference" value="single" required> Single
+      </label>
+      <label>
+        <input type="radio" name="bookingPreference" value="sharing" required> Sharing
+      </label>
+
+      <button>Provide Feedback</button>
+    </form>
+  </div>
+
+  <script>
+    // Extract the username from the URL's query parameters
+    const urlParams = new URLSearchParams(window.location.search);
+    const username = urlParams.get('username');
+
+    // Update the content of the username element
+    const usernameElement = document.getElementById('username');
+    if (usernameElement) {
+      usernameElement.textContent = username;
+    }
+  </script>
+</body>
+</html>

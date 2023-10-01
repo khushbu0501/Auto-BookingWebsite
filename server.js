@@ -57,9 +57,10 @@ app.post("/register", async (req, res) => {
 app.post("/login", async (req, res) => {
   try {
     const check = await Users.findOne({ username: req.body.username });
+
     if (check && check.password === req.body.password) {
       if (check.role === "Student") {
-        res.redirect("/student-profile");
+        res.redirect(`/student-profile?username=${check.username}`); // Pass username as query parameter
       } else if (check.role === "Provider") {
         res.redirect("/provider-profile");
       } else {
