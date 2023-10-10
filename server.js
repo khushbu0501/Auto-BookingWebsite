@@ -1,6 +1,7 @@
 const express = require("express");
 const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
+const session = require("express-session");
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -10,7 +11,9 @@ app.use(express.static("public"));
 app.use(express.urlencoded({ extended: false }));
 
 mongoose
-  .connect("mongodb://localhost:27017/database")
+  .connect(
+    "mongodb://localhost:27017/database"
+  )
   .then(() => {
     console.log("mongodb connected");
   })
@@ -27,6 +30,11 @@ const userSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  email: {
+    type: String,
+    required: true,
+    unique: true,
+  },
   role: {
     type: String,
     required: true,
@@ -34,7 +42,28 @@ const userSchema = new mongoose.Schema({
   },
 });
 
-const Users = new mongoose.model("User", userSchema);
+const User = new mongoose.model("user", userSchema);
+
+const autoSchema = new mongoose.Schema({
+  autoNumber: {
+    type: String,
+    required: true,
+  },
+  driverName: {
+    type: String,
+    required: true,
+  },
+  capacity: {
+    type: Number,
+    default: 6,
+  },
+  availability: {
+    type: Boolean,
+    default: true,
+  },
+});
+
+const Autos = new mongoose.model("auto", autoSchema);
 
 app.get("/login", (req, res) => {
   res.sendFile(__dirname + "/public/login.html");
@@ -49,30 +78,70 @@ app.post("/register", async (req, res) => {
     username: req.body.username,
     password: req.body.password,
     role: req.body.role,
+    email: req.body.email,
   };
-  await Users.insertMany([data]);
+  await User.insertMany([data]);
   res.redirect("/login");
 });
 
 app.post("/login", async (req, res) => {
   try {
-    const check = await Users.findOne({ username: req.body.username });
+    console.log("Login request received:", req.body);
 
-    if (check && check.password === req.body.password) {
-      if (check.role === "Student") {
-        res.redirect(`/student-profile?username=${check.username}`); // Pass username as query parameter
-      } else if (check.role === "Provider") {
+    const { email, username, password } = req.body;
+
+    // Check if either email or username, and password are provided
+    if ((!email && !username) || !password) {
+      return res.status(400).send("Email/Username and password are required.");
+    }
+
+    console.log("Searching for user...");
+
+    // Use email or username to find the user
+    const user = await User.findOne({
+      $or: [{ email }, { username }],
+    });
+
+    console.log("User found:", user);
+
+    if (user && user.password === password) {
+      console.log("Login successful!");
+
+      if (user.role === "Student") {
+        res.redirect(`/student-profile?username=${user.username}`);
+      } else if (user.role === "Provider") {
         res.redirect("/provider-profile");
       } else {
-        res.send("Invalid role");
+        res.status(400).send("Invalid role");
       }
     } else {
-      res.send("Wrong password");
+      console.log("Invalid credentials");
+      res.status(400).send("Invalid credentials");
     }
   } catch (error) {
-    console.error(error);
-    res.send("An error occurred.");
+    console.error("Login error:", error);
+    res.status(500).send("An error occurred.");
   }
+});
+
+// Logout endpoint
+app.use(
+  session({
+    secret: "your_secret_key", // Change this to a random secret key
+    resave: false,
+    saveUninitialized: true,
+  })
+);
+
+app.get("/logout", (req, res) => {
+  // Destroy the session
+  req.session.destroy((err) => {
+    if (err) {
+      return res.status(500).send("Error logging out");
+    }
+    // Redirect to login page after logout
+    res.redirect("/login");
+  });
 });
 
 app.get("/student-profile", (req, res) => {
