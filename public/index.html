@@ -140,10 +140,15 @@ background: linear-gradient(90deg, rgba(131,58,180,1) 0%, rgba(253,29,135,1) 50%
     <div class="navbar">
         <ul>
 
-            <li><a href="#">Home</a></li>
-            <li><a href="#">About</a></li>
+            <li><a href="/">Home</a></li>
+            <form action="./about.html" method="get">
+                <button type="submit" >About</button>
+            </form></li>
             <!-- <li><a href="#">Services</a></li> -->
-            <li><a href="#">Contact</a></li>
+            <form action="./contact.html" method="get">
+                <button type="submit" >Contact</button>
+            </form></li>
+            <!-- <li><a href="#">Contact</a></li> -->
            <li> 
                 
             <form action="./register.html" method="get">
@@ -159,7 +164,10 @@ background: linear-gradient(90deg, rgba(131,58,180,1) 0%, rgba(253,29,135,1) 50%
     <div class="header">
         <h1>Welcome to AutoBooking</h1>
         <p>Your Trusted Auto Booking Service</p>
-        <button class="cta-button">Book Now</button>
+        <li><form action="./login.html" method="get">
+            <button  class="cta-button" type="submit" name="button" class="cta-button">Book Now</button>
+          </form></li>
+        <!-- <button class="cta-button" >Book Now</button> -->
     </div>
     <br><br>
     <div class="container">

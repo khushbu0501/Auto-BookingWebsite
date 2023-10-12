@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us - Auto Booking Website</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        .contact {
+            width: 90%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            text-align: center;
+            margin: 20px auto;
+        }
+
+        .contact h1 {
+            font-size: 50px;
+            color: #000;
+            margin-bottom: 25px;
+            position: relative;
+        }
+
+        .contact h1::after {
+            content: "";
+            position: absolute;
+            width: 100%;
+            height: 4px;
+            display: block;
+            margin: 0 auto;
+            background-color: #43e148;
+        }
+
+        .contact p {
+            font-size: 18px;
+            color: #666;
+            margin-bottom: 35px;
+        }
+
+        .container {
+            width: 90%;
+            margin: 0 auto;
+            padding: 10px 20px;
+        }
+
+        .contact-form {
+            width: 60%;
+            margin: 0 auto;
+        }
+
+        .contact-form label {
+            font-size: 18px;
+            color: #333;
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        .contact-form input,
+        .contact-form textarea {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 20px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+        }
+
+        .contact-form textarea {
+            height: 150px;
+        }
+
+        .contact-form button {
+            background-color: #43e148;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 18px;
+            border-radius: 25px;
+            cursor: pointer;
+        }
+
+        .contact-form button:hover {
+            background-color: #89b68a;
+        }
+
+        button {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 18px;
+            cursor: pointer
+        }
+
+        .cta-button {
+            display: inline-block;
+            background-color: #000000;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            font-size: 18px;
+            cursor: pointer;
+        }
+
+        .navbar {
+            background: rgb(131, 58, 180);
+            background: linear-gradient(90deg, rgba(131, 58, 180, 1) 0%, rgba(253, 29, 135, 1) 50%, rgba(252, 176, 69, 1) 100%);
+            color: white;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .navbar ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            margin-left: 980px;
+            align-items: center;
+            height: 80px;
+        }
+
+        .navbar li {
+            margin: 0 20px;
+        }
+
+        .navbar a {
+            text-decoration: none;
+            color: white;
+        }
+
+        ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .footer {
+
+            left: 0;
+            bottom: 0;
+            height: 50px;
+            width: 100%;
+            background: rgb(131, 58, 180);
+            background: linear-gradient(90deg, rgba(131, 58, 180, 1) 0%, rgba(253, 29, 135, 1) 50%, rgba(252, 176, 69, 1) 100%);
+            color: white;
+            text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="navbar">
+        <ul>
+            <li><a href="/">Home</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="./contact.html">Contact</a></li>
+            <li>
+                <form action="./register.html" method="get">
+                    <button type="submit">Register</button>
+                </form>
+            </li>
+            <li>
+                <form action="./login.html" method="get">
+                    <button type="submit" name="button">Login</button>
+                </form>
+            </li>
+        </ul>
+    </div>
+    <div class="contact">
+        <h1>Contact Us</h1>
+        <p>If you have any questions or feedback, please feel free to get in touch with us using the contact form below.
+        </p>
+    </div>
+    <div class="container">
+        <div class="contact-form">
+            <form action="./contact.html" method="post">
+                <label for="name">Name</label>
+                <input type="text" id="name" name="name" required>
+
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" required>
+
+                <label for="message">Message</label>
+                <textarea id="message" name="message" required></textarea>
+
+                <button type="submit">Submit</button>
+            </form>
+        </div>
+    </div>
+    <div class="footer">
+        &copy; 2023 Auto Booking Website
+    </div>
+</body>
+
+</html
