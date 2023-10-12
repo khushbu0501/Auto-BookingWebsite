@@ -1,0 +1,84 @@
+<!-- <!DOCTYPE html>
+<html>
+<head>
+  <title>Suggested Autos</title>
+</head>
+<body>
+  <h1>Suggested Autos</h1>
+  <ul id="autosList"></ul>
+
+  
+</body>
+</html> -->
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Suggested Autos</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+    }
+
+    h1 {
+      font-size: 24px;
+      margin-bottom: 10px;
+    }
+
+    .auto-card {
+      border: 1px solid #ccc;
+      padding: 10px;
+      margin-bottom: 10px;
+      border-radius: 5px;
+      width: 300px; /* Adjust the width as needed */
+    }
+
+    .auto-card p {
+      margin: 5px 0;
+    }
+
+    .auto-card p span {
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <h1>Suggested Autos</h1>
+  <div id="autosList"></div>
+
+  <script>
+    // Sample autos data (replace this with your fetched data)
+    const autos = [
+      { autoNumber: "A001", driverName: "John Doe", capacity: 6, rating: 4.5 },
+      { autoNumber: "A002", driverName: "Jane Smith", capacity: 6, rating: 3.8 },
+      // ... add more autos as needed
+    ];
+
+    const autosList = document.getElementById('autosList');
+
+    autos.forEach(auto => {
+      const autoCard = document.createElement('div');
+      autoCard.classList.add('auto-card');
+
+      const autoNumber = document.createElement('p');
+      autoNumber.innerHTML = `<span>Auto Number:</span> ${auto.autoNumber}`;
+
+      const driverName = document.createElement('p');
+      driverName.innerHTML = `<span>Driver Name:</span> ${auto.driverName}`;
+
+      const capacity = document.createElement('p');
+      capacity.innerHTML = `<span>Capacity:</span> ${auto.capacity}`;
+
+      const rating = document.createElement('p');
+      rating.innerHTML = `<span>Rating:</span> ${auto.rating}`;
+
+      autoCard.appendChild(autoNumber);
+      autoCard.appendChild(driverName);
+      autoCard.appendChild(capacity);
+      autoCard.appendChild(rating);
+
+      autosList.appendChild(autoCard);
+    });
+  </script>
+</body>
+</html>
